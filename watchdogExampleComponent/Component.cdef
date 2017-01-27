@@ -1,0 +1,17 @@
+sources:
+{
+    watchdogExample.c
+}
+
+cflags:
+{
+    -std=c99
+}
+
+requires:
+{
+    api:
+    {
+        le_wdog.api
+    }
+}

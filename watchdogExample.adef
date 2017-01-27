@@ -1,0 +1,33 @@
+version: 0.1
+
+start: manual
+
+// BUG!
+// It seems that when the app is not sandboxed the watchdogTimeout value set in the adef is ignored.
+// A message like this is printed the first time the watchdog is kicked:
+//   > Jan 6 02:19:19 swi-mdm9x15 user.warn Legato: -WRN- | watchdog[11175]/watchdog T=main |
+//   > watchdog.c GetConfigKickTimeoutInterval() 425 | Unknown app with uid 0 requested watchdog -
+//   > using default timeout 30000 ms
+sandboxed: false
+// sandboxed: true
+
+watchdogTimeout: 10000
+watchdogAction: stopApp
+
+components:
+{
+    watchdogExampleComponent
+}
+
+executables:
+{
+    watchdogExample = ( watchdogExampleComponent )
+}
+
+processes:
+{
+    run:
+    {
+        ( watchdogExample )
+    }
+}
